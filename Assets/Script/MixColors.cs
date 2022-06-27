@@ -33,9 +33,6 @@ public class MixColors : MonoBehaviour
                     new Color(0.7f,0f,0f), new Color(0.5f, 0f, 0.9f),
                     new Color(0f, 0.3f, 0f)};
     public Color resultColor;
-    public Color referenceOne = new Color(0.8f, 1.4f, 0);
-    public Color referenceTwo = new Color(0.43f, 0.749f, 0);
-    public Color referenceThree;
     bool flag = false;
 
     public MenuControl Open;
@@ -65,7 +62,7 @@ public class MixColors : MonoBehaviour
             return;
     }
 
-    public void Compare(Color resultColor, Color referenceOne)
+    public void Compare(Color resultColor)
     {
         int index;
         index = SceneManager.GetActiveScene().buildIndex;
@@ -89,18 +86,44 @@ public class MixColors : MonoBehaviour
                 }
                 break;
             case 2:
-                if (resultColor == referenceTwo)
+                if (resultColor.r == 1.15f &&
+                   resultColor.g == 1.25f &&
+                   resultColor.b == 0f)
                 {
-                    Open.OpenMenuPanel();
+                   
+                    print(resultColor);
+                    winPanel.SetActive(true);
+                    losePanel.SetActive(false);
                 }
-
+                else if (apple.activeSelf == false
+                    && orange.activeSelf == false
+                    && cherries.activeSelf == false
+                    && banana.activeSelf == false)
+                {
+                
+                    losePanel.SetActive(true);
+                    winPanel.SetActive(false);
+                }
                 break;
             case 3:
-                if (resultColor == referenceThree)
+                if (resultColor.r == 1.25f &&
+                   resultColor.g == 0.15f &&
+                   resultColor.b == 0.45f)
                 {
-                    Open.OpenMenuPanel();
+                    winPanel.SetActive(true);
+                    losePanel.SetActive(false);
                 }
-
+                else if (apple.activeSelf == false
+                    && orange.activeSelf == false
+                    && cherries.activeSelf == false
+                    && banana.activeSelf == false
+                    && eggplant.activeSelf == false
+                    && cucumber.activeSelf == false
+                    && tomato.activeSelf == false)
+                {
+                    losePanel.SetActive(true);
+                    winPanel.SetActive(false);
+                }
                 break;
             default:
                 break;
@@ -128,10 +151,10 @@ public class MixColors : MonoBehaviour
                 print("Yellow");
                 banana.SetActive(false);
                 BlenderPlay();
-                Compare(resultColor, referenceOne);
+                Compare(resultColor);
 
 
-                print(CompareColors(resultColor,referenceOne));
+                
                 break;
             case "Apple":
                 if (flag == false)
@@ -147,7 +170,7 @@ public class MixColors : MonoBehaviour
                 print("Green");
                 apple.SetActive(false);
                 BlenderPlay();
-                Compare(resultColor, referenceOne);
+                Compare(resultColor);
                 break;
 
             case "Orange":
@@ -163,7 +186,7 @@ public class MixColors : MonoBehaviour
                 print("Orange");
                 orange.SetActive(false);
                 BlenderPlay();
-                print(CompareColors(resultColor, referenceOne));
+                Compare(resultColor);
                 break;
             case "Tomato":
                 if (flag == false)
@@ -180,7 +203,7 @@ public class MixColors : MonoBehaviour
                 print("Red1");
                 tomato.SetActive(false);
                 BlenderPlay();
-                print(CompareColors(resultColor, referenceOne));
+                Compare(resultColor);
                 break;
             case "Cherries":
                 if (flag == false)
@@ -193,10 +216,9 @@ public class MixColors : MonoBehaviour
                     resultColor += aColors[4] / 2;
                 }
                 cylinderRenderer.material.SetColor("_Color", resultColor);
-                print("Red2");
                 cherries.SetActive(false);
                 BlenderPlay();
-                print(CompareColors(resultColor, referenceOne));
+                Compare(resultColor);
                 break;
             case "Eggplant":
                 if (flag == false)
@@ -211,8 +233,11 @@ public class MixColors : MonoBehaviour
                 cylinderRenderer.material.SetColor("_Color", resultColor);
                 print("Purple");
                 eggplant.SetActive(false);
+                print(resultColor.r);
+                print(resultColor.g);
+                print(resultColor.b);
                 BlenderPlay();
-                print(CompareColors(resultColor, referenceOne));
+                Compare(resultColor);
                 break;
             case "Cucamber":
                 if (flag == false)
@@ -228,7 +253,7 @@ public class MixColors : MonoBehaviour
                 print("Dark Green");
                 cucumber.SetActive(false);
                 BlenderPlay();
-                print(CompareColors(resultColor, referenceOne));
+                Compare(resultColor);
                 break;
 
             default:

@@ -15,6 +15,11 @@ public class SceneSwitcher : MonoBehaviour
     public void LoadSceneTwo()
     {
         SceneManager.LoadScene(2);
+
+    }
+    public void LoadSceneThree()
+    {
+        SceneManager.LoadScene(3);
     }
 
 
